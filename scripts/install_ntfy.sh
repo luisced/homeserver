@@ -23,8 +23,7 @@ TTY=$(tty)
 PUBLIC_IP=$(curl -s https://ifconfig.me)  # Alternative: curl -s https://ipinfo.io/ip
 
 # Construct the notification message
-MESSAGE="🔒 🚀 SSH Access Detected
-User: $USER_NAME
+MESSAGE="User: $USER_NAME
 From: $IP_ADDRESS (Internal)
 Public IP: $PUBLIC_IP
 Host: $HOSTNAME

@@ -15,13 +15,18 @@ NTFY_URL="https://ntfy.luishomeserver.com/homeserver-access"
 # Gather SSH session details
 HOSTNAME=$(hostname)
 TIMESTAMP=$(date +"%Y-%m-%d %H:%M:%S")
-USER_NAME=$(who | awk '{print $1}')
+USER_NAME=$(whoami)
 IP_ADDRESS=$(echo $SSH_CONNECTION | awk '{print $1}')
-TTY=$(who | awk '{print $2}')
+TTY=$(tty)
+
+# Get Public IP
+PUBLIC_IP=$(curl -s https://ifconfig.me)  # Alternative: curl -s https://ipinfo.io/ip
 
 # Construct the notification message
-MESSAGE="User: $USER_NAME
-From: $IP_ADDRESS
+MESSAGE="🔒 🚀 SSH Access Detected
+User: $USER_NAME
+From: $IP_ADDRESS (Internal)
+Public IP: $PUBLIC_IP
 Host: $HOSTNAME
 TTY: $TTY
 Time: $TIMESTAMP"
@@ -33,6 +38,7 @@ curl -X POST "$NTFY_URL" \
     -H "Tags: lock,rocket" \
     -H "Click: ssh://$IP_ADDRESS" \
     -d "$MESSAGE"
+
 EOF
 
 # Make script executable

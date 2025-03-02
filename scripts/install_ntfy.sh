@@ -8,7 +8,7 @@ PAM_SSHD="/etc/pam.d/sshd"
 # Create the notification script
 cat <<EOF > $SCRIPT_PATH
 #!/bin/bash
-NTFY_URL="https://ntfy.luishomeserver.com"
+NTFY_URL="https://ntfy.luishomeserver.com/"
 TOPIC="homeserver-access"
 
 IP_ADDRESS=\$(echo \$SSH_CONNECTION | awk '{print \$1}')
